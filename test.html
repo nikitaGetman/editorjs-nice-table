@@ -1,68 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Test of Table</title>
 
     <style>
+      body,
+      html {
+        margin: 0;
+      }
 
-        body, html {
-            margin: 0;
-        }
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
 
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        #editorjs {
-            width: 800px;
-            margin-top: 10px;
-        }
-
+      #editorjs {
+        width: 800px;
+        margin-top: 10px;
+      }
     </style>
+  </head>
+  <body>
+    <div id="editorjs"></div>
 
-</head>
-<body>
-
-<div id="editorjs"></div>
-
-<script src="//cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script>
-<script src="dist/bundle.js"></script>
-<script>
-    const editor = new EditorJS({
-      autofocus: true,
-      data: {
-        time: 1593767457585,
-        blocks: [
-          {
-            type: 'table',
-            data: {
-              content: [
-                ['a', 'table'],
-                ['tool', 'test'],
-                ['press', 'tab'],
-              ]
+    <script src="//cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script>
+    <script src="dist/bundle.js"></script>
+    <script>
+      const editor = new EditorJS({
+        autofocus: true,
+        data: {
+          time: 1593767457585,
+          blocks: [
+            {
+              type: 'table',
+              data: {
+                content: [
+                  ['a', 'table'],
+                  ['tool', 'test'],
+                  ['press', 'tab']
+                ]
+              }
+            }
+          ],
+          version: '2.18.0'
+        },
+        placeholder: 'Table tool test',
+        holder: 'editorjs',
+        tools: {
+          table: {
+            class: Table,
+            inlineToolbar: true,
+            config: {
+              rows: 3,
+              cols: 3
             }
           }
-        ],
-        version: '2.18.0',
-      },
-      placeholder: 'Table tool test',
-      holder: 'editorjs',
-      tools: {
-        table: {
-          class: Table,
-          inlineToolbar: true,
-          config: {
-            rows: 3,
-            cols: 3
-          }
         }
-      }
-    })
-</script>
-
-</body>
+      });
+    </script>
+  </body>
 </html>

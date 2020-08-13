@@ -1,11 +1,9 @@
 import './styles/table-constructor.pcss';
-import {create} from './documentUtils';
-import {Table} from './table';
+import { create } from './documentUtils';
+import { Table } from './table';
 
 const CSS = {
   editor: 'tc-editor',
-  toolBarHor: 'tc-toolbar--hor',
-  toolBarVer: 'tc-toolbar--ver',
   inputField: 'tc-table__inp'
 };
 
@@ -27,9 +25,7 @@ export class TableConstructor {
     this._fillTable(data, size);
 
     /** creating container around table */
-    this._container = create('div', [CSS.editor, api.styles && api.styles.block], null, [
-      this._table.htmlElement
-    ]);
+    this._container = create('div', [CSS.editor, api.styles && api.styles.block], null, [this._table.htmlElement]);
   }
 
   /**

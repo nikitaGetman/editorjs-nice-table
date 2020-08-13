@@ -1,13 +1,14 @@
 /* tc- project's prefix*/
 
 .tc-table {
+  position: relative;
   width: 100%;
   height: 100%;
   border-collapse: collapse;
   table-layout: fixed;
 
   &__wrap {
-    border: 1px solid #DBDBE2;
+    border: 1px solid #dbdbe2;
     border-radius: 3px;
     position: relative;
     height: 100%;
@@ -15,8 +16,32 @@
     box-sizing: border-box;
   }
 
+  &__top-border {
+    position: absolute;
+    top: -20px;
+    left: 0;
+    right: 0;
+    height: 20px;
+
+    &:hover {
+      cursor: s-resize;
+    }
+  }
+  &__left-border {
+    position: absolute;
+    left: -20px;
+    top: 0;
+    bottom: 0;
+    width: 20px;
+
+    &:hover {
+      cursor: e-resize;
+    }
+  }
+
   &__cell {
-    border: 1px solid #DBDBE2;
+    position: relative;
+    border: 1px solid #dbdbe2;
     padding: 0;
     vertical-align: top;
   }
@@ -35,7 +60,12 @@
   }
 
   &__highlight {
-    background-color: rgba(0, 0, 0, .1);
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  &__first-cell {
+    background-color: rgba(0, 0, 0, 0.03);
+    outline: 1px solid rgba(0, 0, 0, 0.2);
   }
 
   tbody tr:first-child td {
