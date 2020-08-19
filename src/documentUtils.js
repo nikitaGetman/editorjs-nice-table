@@ -5,7 +5,7 @@
  * @private
  */
 function _isNotMissed(elem) {
-  return (!(elem === undefined || elem === null));
+  return !(elem === undefined || elem === null);
 }
 
 /**
@@ -39,4 +39,11 @@ export function create(tagName, cssClasses = null, attrs = null, children = null
     }
   }
   return elem;
+}
+
+export function whichChild(elem) {
+  if (!elem) return undefined;
+  let i = 0;
+  while ((elem = elem.previousSibling) != null) ++i;
+  return i;
 }
