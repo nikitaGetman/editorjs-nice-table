@@ -1,24 +1,12 @@
-const { TableConstructor } = require('./tableConstructor');
+const { TableCore } = require('./tableCore');
 const toolboxIcon = require('./img/toolboxIcon.svg');
-const insertColBefore = require('./img/insertColBeforeIcon.svg');
-const insertColAfter = require('./img/indertColAfterIcon.svg');
-const insertRowBefore = require('./img/insertRowBeforeIcon.svg');
+const insertColAfter = require('./img/insertColAfter.svg');
 const insertRowAfter = require('./img/insertRowAfter.svg');
-const deleteRow = require('./img/deleteRowIcon.svg');
-const deleteCol = require('./img/deleteColIcon.svg');
 
 const Icons = {
   Toolbox: toolboxIcon,
-  InsertColBefore: insertColBefore,
   InsertColAfter: insertColAfter,
-  InsertRowBefore: insertRowBefore,
-  InsertRowAfter: insertRowAfter,
-  DeleteRow: deleteRow,
-  DeleteCol: deleteCol
-};
-
-const CSS = {
-  input: 'tc-table__inp'
+  InsertRowAfter: insertRowAfter
 };
 
 /**
@@ -59,32 +47,16 @@ class Table {
   constructor({ data, config, api }) {
     this.api = api;
 
-    this._tableConstructor = new TableConstructor(data, config, api);
+    this._table = new TableCore(data, config, api);
 
     this.actions = [
-      {
-        actionName: 'InsertColBefore',
-        icon: Icons.InsertColBefore
-      },
       {
         actionName: 'InsertColAfter',
         icon: Icons.InsertColAfter
       },
       {
-        actionName: 'InsertRowBefore',
-        icon: Icons.InsertRowBefore
-      },
-      {
         actionName: 'InsertRowAfter',
         icon: Icons.InsertRowAfter
-      },
-      {
-        actionName: 'DeleteRow',
-        icon: Icons.DeleteRow
-      },
-      {
-        actionName: 'DeleteCol',
-        icon: Icons.DeleteCol
       }
     ];
   }
@@ -95,18 +67,10 @@ class Table {
    */
   performAction(actionName) {
     switch (actionName) {
-      case 'InsertColBefore':
-        return this._tableConstructor.table.insertColumnBefore();
       case 'InsertColAfter':
-        return this._tableConstructor.table.insertColumnAfter();
-      case 'InsertRowBefore':
-        return this._tableConstructor.table.insertRowBefore();
+        return this._table.insertColumnAfter();
       case 'InsertRowAfter':
-        return this._tableConstructor.table.insertRowAfter();
-      case 'DeleteRow':
-        return this._tableConstructor.table.deleteRow();
-      case 'DeleteCol':
-        return this._tableConstructor.table.deleteColumn();
+        return this._table.insertRowAfter();
     }
   }
 
@@ -136,7 +100,7 @@ class Table {
    * @public
    */
   render() {
-    return this._tableConstructor.htmlElement;
+    return this._table.htmlContainer;
   }
 
   /**
@@ -145,36 +109,10 @@ class Table {
    * @public
    */
   save(toolsContent) {
-    const table = toolsContent.querySelector('table');
-    const data = [];
-    const rows = table.rows;
-
-    for (let i = 0; i < rows.length; i++) {
-      const row = rows[i];
-      const cols = Array.from(row.cells);
-      const inputs = cols.map(cell => cell.querySelector('.' + CSS.input));
-      const isWorthless = inputs.every(this._isEmpty);
-
-      if (isWorthless) {
-        continue;
-      }
-      data.push(inputs.map(input => input.innerHTML));
-    }
-
+    const data = this._table.getData();
     return {
       content: data
     };
-  }
-
-  /**
-   * @private
-   *
-   * Check input field is empty
-   * @param {HTMLElement} input - input field
-   * @return {boolean}
-   */
-  _isEmpty(input) {
-    return !input.textContent.trim();
   }
 }
 

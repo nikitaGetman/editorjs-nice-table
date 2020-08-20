@@ -59,6 +59,16 @@
     overflow: hidden;
   }
 
+  &__align-left {
+    text-align: left;
+  }
+  &__align-center {
+    text-align: center;
+  }
+  &__align-right {
+    text-align: right;
+  }
+
   &__highlight {
     background-color: rgba(0, 0, 0, 0.1);
   }
@@ -82,5 +92,39 @@
 
   tbody tr td:first-child {
     border-left: none;
+  }
+}
+
+.tc-table-tools {
+  &__wrapper {
+    position: absolute;
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 144px;
+    background-color: #fff;
+    box-shadow: 1px 1px 8px #ccc;
+    padding: 0 4px;
+    transition: all 0.3s;
+
+    opacity: 0;
+
+    &--visible {
+      opacity: 1;
+    }
+  }
+  &__button {
+    background: transparent;
+    border: none;
+    padding: 4px 2px;
+    margin: 0 4px;
+    transition: 0.2s;
+
+    &:hover {
+      background-color: rgba(100, 100, 100, 0.1);
+      cursor: pointer;
+    }
+    &:focus {
+      outline: none;
+    }
   }
 }
